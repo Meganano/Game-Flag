@@ -34,6 +34,15 @@ class MyApplication(arcade.Window):
         self.town2.draw()
         self.flag1.draw()
         self.flag2.draw()
+        
+    def update(self, delta):
+        player1 = self.player1
+ 
+        if player1.center_y > SCREEN_HEIGHT:
+            player1.center_y = SCREEN_HEIGHT
+        player1.set_position(player1.center_x, player1.center_y + 5)
+
+
 
 def main():
     window = MyApplication(SCREEN_WIDTH, SCREEN_HEIGHT)
