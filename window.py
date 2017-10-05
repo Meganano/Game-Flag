@@ -4,10 +4,24 @@ from Playerf import World,Player1
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 500
 
+class ModelSprite(arcade.Sprite):
+    def __init__(self, *args, **kwargs):
+        self.model = kwargs.pop('model', None)
+        super().__init__(*args, **kwargs)
+ 
+    def sync_with_model(self):
+        if self.model:
+            self.set_position(self.model.x, self.model.y)
+ 
+    def draw(self):
+        self.sync_with_model()
+        super().draw()
+
 class MyApplication(arcade.Window):
     def __init__(self, width, height):       
         super().__init__(width, height)
         self.world = World(width,height)
+        self.player1_p = ModelSprite('images/Player1.png',model=self.world.player1)
 
     def setup(self):
         """ Set up the game and initialize the variables. """
@@ -40,9 +54,9 @@ class MyApplication(arcade.Window):
         self.flag1.draw()
         self.flag2.draw()
         
+
     def update(self, delta):
         self.world.update(delta)
-        self.player1_p.set_position(self.world.player1.x, self.world.player1.y)
 
 
 def main():
