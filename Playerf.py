@@ -39,4 +39,10 @@ class Player1:
     def update(self, delta):
         if self.y > self.world.height:
             self.y = self.world.height
+        if self.y < 0:
+            self.y = 0
+        if self.x < 0:
+            self.x = 0
+        if self.x > self.world.width:
+            self.x = self.world.width
         
