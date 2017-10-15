@@ -30,8 +30,9 @@ class MyApplication(arcade.Window):
         self.player1_p = ModelSprite('images/Player1.png',model=self.world.player1)
         ##self.player1_p = arcade.Sprite('images/Player1.png')        
         
-        self.player2 = arcade.Sprite('images/Player2.png')
-        self.player2.set_position(650,250)
+        self.player2_p = ModelSprite('images/Player2.png',model=self.world.player2)
+        ##self.player2 = arcade.Sprite('images/Player2.png')
+        ##self.player2.set_position(650,250)
         
         self.town1 = arcade.Sprite('images/town1.png')
         self.town1.set_position(50,270)
@@ -49,7 +50,7 @@ class MyApplication(arcade.Window):
         arcade.start_render()
         arcade.draw_texture_rectangle(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2,SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
         self.player1_p.draw()
-        self.player2.draw()
+        self.player2_p.draw()
         self.town1.draw()
         self.town2.draw()
         self.flag1.draw()
