@@ -1,8 +1,9 @@
 import arcade
-from Playerf import World,Player1
+from Playerf import World
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 500
+
 
 class ModelSprite(arcade.Sprite):
     def __init__(self, *args, **kwargs):
@@ -27,12 +28,9 @@ class MyApplication(arcade.Window):
         """ Set up the game and initialize the variables. """
         self.background = arcade.load_texture("images/space-bg.jpg")
 
-        self.player1_p = ModelSprite('images/Player1.png',model=self.world.player1)
-        ##self.player1_p = arcade.Sprite('images/Player1.png')        
+        self.player1_p = ModelSprite('images/Player1.png',model=self.world.player1)        
         
         self.player2_p = ModelSprite('images/Player2.png',model=self.world.player2)
-        ##self.player2 = arcade.Sprite('images/Player2.png')
-        ##self.player2.set_position(650,250)
         
         self.town1 = arcade.Sprite('images/town1.png')
         self.town1.set_position(50,270)
@@ -58,7 +56,9 @@ class MyApplication(arcade.Window):
 
     def on_key_press(self, key, key_modifiers):
         self.world.on_key_press(key, key_modifiers)
-        
+
+    def on_key_release(self, key, key_modifiers):
+        self.world.on_key_release(key, key_modifiers)
 
     def update(self, delta):
         self.world.update(delta)
