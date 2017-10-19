@@ -6,27 +6,16 @@ class World:
         self.height = height
         self.player1 = Player1(self,150, 250)
         self.player2 = Player2(self,650,250)
-
+        self.flag_p1 = FlagPlayer1(self,50,270)
+        self.flag_p2 = FlagPlayer2(self,750,270)
+        
     def on_key_press(self, key, key_modifiers):
         ##try to use array
         self.player2.directions_press(key,key_modifiers)
-        ##
-
         self.player1.directions_press(key,key_modifiers)
 
-        """if key == arcade.key.W:
-            self.player1.directions('w')
-        if key == arcade.key.S:
-            self.player1.directions('s')
-        if key == arcade.key.A:
-            self.player1.directions('a')
-        if key == arcade.key.D:
-            self.player1.directions('d')
-        """
         
     def on_key_release(self, key, key_modifiers):
-       ## if key == arcade.key.W or key == arcade.key.S or key == arcade.key.A or key == arcade.key.D:
-       ##     self.player1.directions('\n')
         self.player2.directions_release(key,key_modifiers)
         self.player1.directions_release(key,key_modifiers)
         
@@ -34,6 +23,11 @@ class World:
             self.player1.update(delta)
             self.player2.update(delta)
 
+class FlagPlayer1:
+    def __init__(self,world,x,y):
+        self.world = world
+        self.x = x
+        self.y = y
 
 class Player2:
     def __init__(self, world, x, y):
@@ -75,6 +69,13 @@ class Player2:
                    self.x -= 5
         
 
+class FlagPlayer2:
+    def __init__(self,world,x,y):
+        self.world = world
+        self.x = x
+        self.y = y
+
+        
 class Player1:
     def __init__(self, world, x, y):
         self.world = world
@@ -104,6 +105,7 @@ class Player1:
             self.directions1.remove('right')
     
     def update(self, delta):
+        
         for i in range(len(self.directions1)):
             if self.directions1[i] != '\n':
                 if self.directions1[i] == 'up' and self.y < self.world.height:
