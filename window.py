@@ -59,7 +59,7 @@ class MyApplication(arcade.Window):
 
     def on_key_release(self, key, key_modifiers):
         self.world.on_key_release(key, key_modifiers)
-
+        
     def update(self, delta):
         self.world.update(delta)
 
