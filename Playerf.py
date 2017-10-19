@@ -1,5 +1,8 @@
 import arcade.key
 
+HIT_SIZE_WIDTH = 25
+HIT_SIZE_HEIGHT = 50
+
 class World:
     def __init__(self, width, height):
         self.width = width
@@ -22,12 +25,21 @@ class World:
     def update(self, delta):
             self.player1.update(delta)
             self.player2.update(delta)
+            self.flag_p1.update(delta)
+            self.flag_p2.update(delta)
 
 class FlagPlayer1:
     def __init__(self,world,x,y):
         self.world = world
         self.x = x
         self.y = y
+        
+    def update(self,delta):
+        ##print("self.x:",self.x)
+        ##print("self.y:",self.y)
+        if (abs(self.x - self.world.player2.x) <= HIT_SIZE_WIDTH) and (abs(self.y - self.world.player2.y) <= HIT_SIZE_HEIGHT):
+            self.x = self.world.player2.x
+            self.y = self.world.player2.y
 
 class Player2:
     def __init__(self, world, x, y):
@@ -74,6 +86,13 @@ class FlagPlayer2:
         self.world = world
         self.x = x
         self.y = y
+        
+    def update(self,delta):
+        ##print("self.x:",self.x)
+        ##print("self.y:",self.y)
+        if (abs(self.x - self.world.player1.x) <= HIT_SIZE_WIDTH) and (abs(self.y - self.world.player1.y) <= HIT_SIZE_HEIGHT):
+            self.x = self.world.player1.x
+            self.y = self.world.player1.y
 
         
 class Player1:
@@ -104,8 +123,7 @@ class Player1:
         if key == arcade.key.D:
             self.directions1.remove('right')
     
-    def update(self, delta):
-        
+    def update(self, delta):  
         for i in range(len(self.directions1)):
             if self.directions1[i] != '\n':
                 if self.directions1[i] == 'up' and self.y < self.world.height:
