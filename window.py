@@ -1,5 +1,7 @@
 import arcade
 from Playerf import World
+from Playerf import FlagPlayer1
+from Playerf import FlagPlayer2
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 500
@@ -44,6 +46,7 @@ class MyApplication(arcade.Window):
 
         self.total_time = 0.0
         self.timer_text = None
+
         ###
         
 
@@ -64,6 +67,8 @@ class MyApplication(arcade.Window):
             self.timer_text = arcade.create_text(output, arcade.color.WHITE, 20)
         
         arcade.render_text(self.timer_text,650,450)
+        arcade.draw_text(str(FlagPlayer1.score),750,400,arcade.color.WHITE,20)
+        arcade.draw_text(str(FlagPlayer2.score),50,400,arcade.color.WHITE,20)
         
 
     def on_key_press(self, key, key_modifiers):

@@ -3,6 +3,9 @@ import arcade.key
 HIT_SIZE_WIDTH = 25
 HIT_SIZE_HEIGHT = 50
 HIT_SIZE_PLAYER = 32
+TOWN_P2_X = 750
+TOWN_P1_X = 50
+ALL_OBJECT_Y = 270
 
 class World:
     def __init__(self, width, height):
@@ -28,13 +31,17 @@ class World:
             self.player2.update(delta)
             self.flag_p1.update(delta)       
             self.flag_p2.update(delta)
+            print("score: ",self.flag_p2.score)
 
 class FlagPlayer1:
+    ## coulor : Yellow
+    score = 0
     def __init__(self,world,x,y):
         self.world = world
         self.x = x
         self.y = y
         self.getflag = False
+        ##self.score = score
         
     def update(self,delta):
         ##print("self.x:",self.x)
@@ -44,11 +51,17 @@ class FlagPlayer1:
             self.y = self.world.player2.y
             self.getflag = True
         if(abs(self.world.player1.x - self.world.player2.x) <= HIT_SIZE_PLAYER) and (abs(self.world.player1.y - self.world.player2.y) <= HIT_SIZE_PLAYER) and (self.getflag == True):
-            self.x = 50
-            self.y = 270
+            self.x = TOWN_P1_X
+            self.y = ALL_OBJECT_Y
+            self.getflag = False
+        if(abs(self.world.player2.x - TOWN_P2_X) <= HIT_SIZE_WIDTH) and (abs(self.world.player2.y - ALL_OBJECT_Y) <= HIT_SIZE_HEIGHT) and (self.getflag == True):
+            FlagPlayer1.score += 1
+            self.x = TOWN_P1_X
+            self.y = ALL_OBJECT_Y
             self.getflag = False
 
 class Player2:
+    ##Colour : Blue
     def __init__(self, world, x, y):
         self.world = world
         self.x = x
@@ -89,11 +102,13 @@ class Player2:
         
 
 class FlagPlayer2:
+    score = 0
     def __init__(self,world,x,y):
         self.world = world
         self.x = x
         self.y = y
         self.getflag = False
+        self.score = 0
         
     def update(self,delta):
         ##print("self.x:",self.x)
@@ -103,12 +118,18 @@ class FlagPlayer2:
             self.y = self.world.player1.y
             self.getflag = True
         if(abs(self.world.player1.x - self.world.player2.x) <= HIT_SIZE_PLAYER) and (abs(self.world.player1.y - self.world.player2.y) <= HIT_SIZE_PLAYER) and (self.getflag == True):
-            self.x = 750
-            self.y = 270
+            self.x = TOWN_P2_X
+            self.y = ALL_OBJECT_Y
+            self.getflag = False
+        if(abs(self.world.player1.x - TOWN_P1_X) <= HIT_SIZE_WIDTH) and (abs(self.world.player1.y - ALL_OBJECT_Y) <= HIT_SIZE_HEIGHT) and (self.getflag == True):
+            FlagPlayer2.score += 1
+            self.x = TOWN_P2_X
+            self.y = ALL_OBJECT_Y
             self.getflag = False
 
         
 class Player1:
+    ## Colour : Yellow
     def __init__(self, world, x, y):
         self.world = world
         self.x = x
