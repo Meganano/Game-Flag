@@ -31,7 +31,7 @@ class World:
             self.player2.update(delta)
             self.flag_p1.update(delta)       
             self.flag_p2.update(delta)
-            print("score: ",self.flag_p2.score)
+            ##print("score: ",self.flag_p2.score)
 
 class FlagPlayer1:
     ## coulor : Yellow

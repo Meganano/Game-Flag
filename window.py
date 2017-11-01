@@ -49,7 +49,7 @@ class MyApplication(arcade.Window):
 
         ###
         
-
+        
     def on_draw(self):
         arcade.start_render()
         arcade.draw_texture_rectangle(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2,SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
@@ -62,15 +62,26 @@ class MyApplication(arcade.Window):
         
         minutes = int(self.total_time)//60
         seconds = int(self.total_time)%60
-        output = f"Time:{minutes:02d}:{seconds:02d}"
+        output = f"Time {minutes:02d}:{seconds:02d}"
+        output_p1 = "Score: {}".format(FlagPlayer1.score)
+        output_p2 = "Score: {}".format(FlagPlayer2.score)
+        
         if not self.timer_text or self.timer_text.text != output:
             self.timer_text = arcade.create_text(output, arcade.color.WHITE, 20)
-        
+            
+        if(FlagPlayer1.score == 5):
+            arcade.draw_texture_rectangle(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2,SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
+            arcade.draw_text("PLAYER 1 WINS !",250,250,arcade.color.WHITE,30)
+        if(FlagPlayer2.score == 5):
+            arcade.draw_texture_rectangle(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2,SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
+            arcade.draw_text("PLAYER 2 WINS !",250,250,arcade.color.WHITE,30)
+            
         arcade.render_text(self.timer_text,650,450)
-        arcade.draw_text(str(FlagPlayer1.score),750,400,arcade.color.WHITE,20)
-        arcade.draw_text(str(FlagPlayer2.score),50,400,arcade.color.WHITE,20)
+        arcade.draw_text(output_p1,700,20,arcade.color.WHITE,15)
+        arcade.draw_text(output_p2,50,20,arcade.color.WHITE,15)
         
 
+        
     def on_key_press(self, key, key_modifiers):
         self.world.on_key_press(key, key_modifiers)
 
